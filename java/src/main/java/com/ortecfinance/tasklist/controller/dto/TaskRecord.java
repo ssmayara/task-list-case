@@ -9,4 +9,5 @@ public record TaskRecord(
     TaskStatus status,
     LocalDate deadline
 ) {
+
 }

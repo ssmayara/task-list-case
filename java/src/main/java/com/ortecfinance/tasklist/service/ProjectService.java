@@ -1,14 +1,11 @@
 package com.ortecfinance.tasklist.service;
 
 import com.ortecfinance.tasklist.controller.dto.CreateProjectRequest;
-import com.ortecfinance.tasklist.controller.dto.CreateTaskRequest;
 import com.ortecfinance.tasklist.controller.dto.ProjectRecord;
-import com.ortecfinance.tasklist.controller.dto.TaskRecord;
 import com.ortecfinance.tasklist.mapper.ProjectMapper;
 import com.ortecfinance.tasklist.model.Project;
 import com.ortecfinance.tasklist.repository.ProjectRepository;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +15,9 @@ public class ProjectService {
   private final ProjectRepository projectRepository;
   private final ProjectMapper projectMapper;
 
-  private final TaskService taskService;
-
-  public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper,
-      TaskService taskService) {
+  public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper) {
     this.projectRepository = projectRepository;
     this.projectMapper = projectMapper;
-    this.taskService = taskService;
   }
 
   @Transactional
@@ -54,8 +47,4 @@ public class ProjectService {
     return project;
   }
 
-  public TaskRecord createTaskForProject(Integer projectId, CreateTaskRequest request) {
-    Optional<Project> project = projectRepository.findById(Long.valueOf(projectId));
-    return taskService.createTask(project.get(), request);
-  }
 }
