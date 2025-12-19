@@ -2,6 +2,7 @@ package com.ortecfinance.tasklist.service;
 
 import com.ortecfinance.tasklist.controller.dto.CreateProjectRequest;
 import com.ortecfinance.tasklist.controller.dto.ProjectRecord;
+import com.ortecfinance.tasklist.exceptions.NotFoundException;
 import com.ortecfinance.tasklist.mapper.ProjectMapper;
 import com.ortecfinance.tasklist.model.Project;
 import com.ortecfinance.tasklist.repository.ProjectRepository;
@@ -39,12 +40,24 @@ public class ProjectService {
 
   @Transactional(readOnly = true)
   public Project findById(Integer projectId) {
-    Project project = projectRepository.findById(Long.valueOf(projectId))
+    Project project = projectRepository.findById(projectId)
         .orElseThrow(() ->
-            new IllegalArgumentException("Project not found: " + projectId)
+            new IllegalArgumentException("Project not found " + projectId)
         );
 
     return project;
+  }
+
+  @Transactional(readOnly = true)
+  public Project findByName(String name) {
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Project name must not be blank");
+    }
+
+    return projectRepository.findByName(name.trim())
+        .orElseThrow(() ->
+            new NotFoundException("Could not find a project with the name \"" + name + "\".")
+        );
   }
 
 }

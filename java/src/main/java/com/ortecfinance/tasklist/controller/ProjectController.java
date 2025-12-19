@@ -9,7 +9,6 @@ import com.ortecfinance.tasklist.service.TaskDeadlineViewService;
 import com.ortecfinance.tasklist.service.TaskService;
 import java.time.LocalDate;
 import java.util.List;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

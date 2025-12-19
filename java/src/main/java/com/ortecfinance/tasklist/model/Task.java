@@ -28,15 +28,15 @@ public class Task {
   @Column(nullable = false, length = 255)
   private String description;
 
-  @Column(nullable = true, length = 20)
-  private String status;
-
   @Column(nullable = true)
   private LocalDate deadline;
 
   @ManyToOne(optional = true)
   @JoinColumn(name = "project_id")
   private Project project;
+
+  @Column(nullable = false)
+  private boolean completed;
 
   @Column(name = "created_at", updatable = false)
   private LocalDateTime createdAt;

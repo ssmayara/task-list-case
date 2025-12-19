@@ -18,11 +18,6 @@ public class TaskController {
     this.taskService = taskService;
   }
 
-//    @GetMapping
-//    public List<String> getTasks() {
-//        return Arrays.asList("Task 1", "Task 2", "Task 3");
-//    }
-
   @GetMapping
   public ResponseEntity<List<TaskRecord>> getAllTasks() {
     return ResponseEntity.ok(taskService.getAllTasks());

@@ -16,7 +16,7 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     project_id INT NULL,
     description VARCHAR(255) NOT NULL,
-    status VARCHAR(20) NULL,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
     deadline DATE NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL

@@ -40,7 +40,7 @@ public class TaskService {
 
     Task task = new Task();
     task.setDescription(request.description().trim());
-    task.setStatus(request.status().name());
+    task.setCompleted(request.completed());
     task.setDeadline(request.deadline());
     task.setProject(project);
 
@@ -56,6 +56,29 @@ public class TaskService {
 
     task.setDeadline(deadline);
     return taskMapper.toRecord(task);
+  }
+
+  @Transactional
+  public TaskRecord updateDeadline(Integer taskId, LocalDate deadline) {
+    Task task = taskRepository.findById(taskId)
+        .orElseThrow(() ->
+            new NotFoundException("Task " + taskId + " not found")
+        );
+
+    task.setDeadline(deadline);
+
+    return taskMapper.toRecord(task);
+  }
+
+  public TaskRecord updateCompleted(int taskId, boolean completed) {
+    Task task = taskRepository.findById(taskId)
+        .orElseThrow(() ->
+            new IllegalArgumentException("Task not found ID  " + taskId)
+        );
+
+    task.setCompleted(completed);
+
+    return taskMapper.toRecord(taskRepository.save(task));
   }
 
 }
