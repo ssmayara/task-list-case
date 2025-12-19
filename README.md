@@ -83,3 +83,62 @@ _Optional_:
 - `GET /projects/view_by_deadline`: Get all tasks grouped by deadline (or also by project if you did the optional part)
 
 
+## 🧱 Tech Stack
+
+- Java 21
+- Spring Boot 3.3.x
+- Spring Web (REST)
+- Spring Data JPA
+- MariaDB (Docker Compose)
+- JUnit 5 & Mockito (unit testing)
+- Swagger / OpenAPI UI (springdoc)
+
+---
+
+## 🧪 Running the Application
+
+### Prerequisites
+
+Before running the application, make sure you have:
+
+- Java 21+
+- Maven 3.3+
+- Docker & Docker Compose
+- An IDE (IntelliJ, Eclipse, VS Code) or a terminal
+
+### Swagger UI
+
+Interactive API documentation is available at:
+
+```bash
+http://localhost:8090/swagger-ui.html
+
+```
+
+## ✅ What I implemented (assignment tasks)
+
+### 1) Deadlines
+- [x] Added a deadline field to tasks (optional by default)
+- [x] Implemented the `deadline <ID> <date>` command to assign or update a task deadline
+- [x] Validated date input and task existence
+- [ ] Optional: Implemented the `today` command to show only tasks with today’s deadline
+
+### 2) Deadline view
+- [x] Implemented the `view-by-deadline` command
+- [x] Tasks are grouped by deadline and ordered chronologically
+- [x] Tasks without a deadline are grouped under a final `No deadline` section
+- [x] Optional: Grouped tasks by project inside each deadline group
+
+### 3) Refactoring for multiple interfaces
+- [x] Extracted core business logic from the command-line interface
+- [x] Refactored services to follow single-responsibility principles
+- [x] Improved testability by isolating domain logic from I/O concerns
+- [x] Added and extended unit tests using JUnit 5 and Mockito
+
+### 4) REST APIs
+- [x] Implemented `POST /projects` to create a new project
+- [x] Implemented `GET /projects` to retrieve all projects with thei
+- [x] Optional: Implemented `POST /projects/{project_id}/tasks`
+- [x] Optional: Implemented `PUT /projects/{project_id}/tasks/{task_id}?deadline`
+- [x] Optional: Implemented `GET /projects/view_by_deadline`
+

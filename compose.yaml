@@ -1,0 +1,27 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MARIADB_DATABASE: mydatabase
+      MARIADB_USER: myuser
+      MARIADB_PASSWORD: secret
+      MARIADB_ROOT_PASSWORD: verysecret
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/bootstrap/:/docker-entrypoint-initdb.d/:ro
+      - mariadb_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
+
+volumes:
+  mariadb_data:
