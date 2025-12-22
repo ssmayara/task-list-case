@@ -4,11 +4,13 @@ import com.ortecfinance.tasklist.controller.dto.CreateProjectRequest;
 import com.ortecfinance.tasklist.controller.dto.CreateTaskRequest;
 import com.ortecfinance.tasklist.controller.dto.ProjectRecord;
 import com.ortecfinance.tasklist.controller.dto.TaskRecord;
+import com.ortecfinance.tasklist.controller.dto.TaskResponse;
 import com.ortecfinance.tasklist.service.ProjectService;
 import com.ortecfinance.tasklist.service.TaskDeadlineViewService;
 import com.ortecfinance.tasklist.service.TaskService;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,9 +69,14 @@ public class ProjectController {
     return ResponseEntity.ok(updated);
   }
 
-  @GetMapping(value = "/view_by_deadline", produces = MediaType.TEXT_PLAIN_VALUE)
-  public ResponseEntity<String> viewByDeadline() {
-    return ResponseEntity.ok(taskDeadlineViewService.viewByDeadlineGroupedByProject());
+//  @GetMapping(value = "/view_by_deadline", produces = MediaType.TEXT_PLAIN_VALUE)
+//  public ResponseEntity<String> viewByDeadline() {
+//    return ResponseEntity.ok(taskDeadlineViewService.viewByDeadlineGroupedByProject());
+//  }
+
+  @GetMapping(value = "/view_by_deadline", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Map<String, Map<String, List<TaskResponse>>>> viewByDeadline() {
+    return ResponseEntity.ok(taskDeadlineViewService.viewByDeadlineGroupedByProjectJson());
   }
 
 }
